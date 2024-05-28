@@ -69,3 +69,6 @@ end
 gem "jsbundling-rails", "~> 1.3"
 
 gem "foreman", "~> 0.88.1"
+
+gem "graphql", "~> 2.3"
+gem "graphiql-rails", group: :development
