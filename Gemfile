@@ -72,3 +72,5 @@ gem "foreman", "~> 0.88.1"
 
 gem "graphql", "~> 2.3"
 gem "graphiql-rails", group: :development
+
+gem "faker", "~> 3.3"
