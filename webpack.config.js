@@ -29,6 +29,7 @@ module.exports = {
     new ESLintPlugin({
       extensions: ['ts', 'tsx'],
       configType: 'flat',
+      fix: true,
     }),
     new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
   ],

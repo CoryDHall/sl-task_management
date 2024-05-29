@@ -13,11 +13,20 @@ export default tseslint.config(
   },
   {
     files: ['**/*.{mjs,js}', '**/*.ts', '**/*.tsx'],
+    settings: {
+      react: { //
+        version: 'detect',
+      },
+    },
     rules: {
       'indent': [
         'warn',
         2,
         {},
+      ],
+      'react/jsx-indent': [
+        'warn',
+        2,
       ],
       'object-curly-spacing': [
         'warn',
@@ -83,6 +92,9 @@ export default tseslint.config(
         'warn',
       ],
       'react/jsx-tag-spacing': [
+        'warn',
+      ],
+      'react/jsx-closing-tag-location': [
         'warn',
       ],
       'react/self-closing-comp': [
