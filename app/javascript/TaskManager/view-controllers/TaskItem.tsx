@@ -1,5 +1,4 @@
 import React from 'react';
-import { graphql } from '../../graphql/types';
 import { useQuery } from '@apollo/client';
 import {
   Route, Routes, useParams,
@@ -8,17 +7,7 @@ import { NavLink } from 'react-router-dom';
 import EditTask from '../views/EditTask';
 import RemoveTask from '../views/RemoveTask';
 import ShowTask from '../views/ShowTask';
-
-const FIND_TASK = graphql(`
-  query FindTask($id: ID!) {
-    task(id: $id) {
-      id
-      title
-      description
-      completed
-      dueDate
-    }
-  }`);
+import { FIND_TASK } from '../graphql/queries';
 
 
 export default function TaskItem() {

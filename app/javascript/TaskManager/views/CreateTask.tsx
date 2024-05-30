@@ -1,24 +1,10 @@
 import React, {
   useRef, useState,
 } from 'react';
-import { graphql } from '../../graphql/types';
 import { useMutation } from '@apollo/client';
 import { Navigate } from 'react-router';
 import { GET_TASKS } from '../graphql/queries';
-
-const CREATE_NEW_TASK = graphql(`
-mutation CreateNewTask($title: String!, $description: String!, $dueDate: ISO8601Date) {
-  taskCreate(input: {taskInput: { title: $title, description: $description, dueDate: $dueDate }}) {
-    task {
-      id
-      title
-      description
-      completed
-      dueDate
-    }
-  }
-}
-  `);
+import { CREATE_NEW_TASK } from '../graphql/mutations';
 
 export interface CreateTaskProps {
   requireDueDate?: boolean;

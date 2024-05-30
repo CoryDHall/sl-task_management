@@ -1,20 +1,11 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { graphql } from '../../graphql/types';
 import { Task } from '../../graphql/types/graphql';
 import { Navigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { GET_TASKS } from '../graphql/queries';
+import { REMOVE_TASK } from '../graphql/mutations';
 
-const REMOVE_TASK = graphql(`
-  mutation RemoveTask($id: ID!) {
-    taskDelete(input: { id: $id }) {
-      task {
-        id
-      }
-    }
-  }
-`);
 
 export interface RemoveTaskProps {
   navigateDestination?: string;
@@ -31,7 +22,7 @@ export default function RemoveTask({ navigateDestination, cancelDestination = '.
         query: GET_TASKS,
         data: { tasks: tasks.filter((task: Task) => task.id !== taskDelete.task.id) },
       });
-    }, 
+    },
   });
   const shouldNavigateOnDelete = typeof navigateDestination !== 'undefined';
   const willNavigate = shouldNavigateOnDelete && data && typeof error === 'undefined';

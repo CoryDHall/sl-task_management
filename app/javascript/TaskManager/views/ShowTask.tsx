@@ -1,30 +1,11 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { graphql } from '../../graphql/types';
 import { Task } from '../../graphql/types/graphql';
 import TaskView from '../components/TaskView';
+import {
+  MARK_TASK_COMPLETED, MARK_TASK_INCOMPLETE, 
+} from '../graphql/mutations';
 
-const MARK_TASK_COMPLETED = graphql(`
-  mutation MarkTaskCompleted($id: ID!) {
-    taskUpdate(input: { id: $id, taskInput: { completed: true } }) {
-      task {
-        id
-        completed
-      }
-    }
-  }
-`);
-
-const MARK_TASK_INCOMPLETE = graphql(`
-  mutation MarkTaskIncomplete($id: ID!) {
-    taskUpdate(input: { id: $id, taskInput: { completed: false } }) {
-      task {
-        id
-        completed
-      }
-    }
-  }
-`);
 
 export interface ShowTaskProps {
   task: Task;

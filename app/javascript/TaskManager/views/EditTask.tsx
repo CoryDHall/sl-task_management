@@ -1,25 +1,12 @@
 import React, {
   useRef, useState,
 } from 'react';
-import { graphql } from '../../graphql/types';
 import { useMutation } from '@apollo/client';
 import { Navigate } from 'react-router';
 import { Task } from '../../graphql/types/graphql';
 import { NavLink } from 'react-router-dom';
+import { UPDATE_TASK } from '../graphql/mutations';
 
-const UPDATE_TASK = graphql(`
-mutation UpdateTask($id: ID!, $title: String, $description: String, $dueDate: ISO8601Date, $removeDueDate: Boolean) {
-  taskUpdate(input: {id: $id, taskInput: { title: $title, description: $description, dueDate: $dueDate, removeDueDate: $removeDueDate}}) {
-    task {
-      id
-      title
-      description
-      completed
-      dueDate
-    }
-  }
-}
-  `);
 
 export interface EditTaskProps {
   navigateDestination?: string;
