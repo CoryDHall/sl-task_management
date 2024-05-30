@@ -27,13 +27,10 @@ export interface EditTaskProps {
 };
 
 export default function EditTask({ navigateDestination, task }: EditTaskProps) {
-  const [updateTask, { error, data }] = useMutation(UPDATE_TASK, { refetchQueries: ['FindTask'] });
+  const [updateTask, { error, data }] = useMutation(UPDATE_TASK, { refetchQueries: [/* 'FindTask' */] });
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLInputElement>(null);
   const dueDateRef = useRef<HTMLInputElement>(null);
-  const [title, setTitle] = useState(task.title);
-  const [description, setDescription] = useState(task.description);
-  const [dueDate, setDueDate] = useState(task.dueDate);
   const [toggleDueDate, setToggleDueDate] = useState(task.dueDate !== null);
   const shouldNavigateOnCreate = typeof navigateDestination !== 'undefined';
   const willNavigate = shouldNavigateOnCreate && data && typeof error === 'undefined';

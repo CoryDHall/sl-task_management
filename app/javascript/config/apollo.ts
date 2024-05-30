@@ -13,6 +13,12 @@ export const getApolloConfig = () => {
       credentials: 'include',
       headers: { 'X-CSRF-Token': getCSRFTokenFromDOM() },
     }),
+    defaultOptions: {
+      watchQuery: {
+        nextFetchPolicy: 'cache-first' as const,
+        fetchPolicy: 'cache-first' as const,
+      },
+    },
   };
 };
 function getCSRFTokenFromDOM(): string {
