@@ -1,6 +1,5 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { Task } from '../../graphql/types/graphql';
 import TaskView from '../components/TaskView';
 import {
   MARK_TASK_COMPLETED, MARK_TASK_INCOMPLETE,

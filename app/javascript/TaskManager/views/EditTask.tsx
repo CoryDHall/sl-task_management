@@ -3,11 +3,10 @@ import React, {
 } from 'react';
 import { useMutation } from '@apollo/client';
 import { Navigate } from 'react-router';
-import { Task } from '../../graphql/types/graphql';
 import { NavLink } from 'react-router-dom';
 import { UPDATE_TASK } from '../graphql/mutations';
 import {
-  iTaskViewProps, iViewProps, 
+  iTaskViewProps, iViewProps,
 } from '../common/viewProps';
 
 
