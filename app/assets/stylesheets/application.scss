@@ -25,3 +25,19 @@ form {
     }
   }
 }
+
+a {
+  color: #000;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.active {
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
