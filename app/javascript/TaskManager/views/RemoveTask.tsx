@@ -4,6 +4,7 @@ import { graphql } from '../../graphql/types';
 import { Task } from '../../graphql/types/graphql';
 import { Navigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { GET_TASKS } from '../graphql/queries';
 
 const REMOVE_TASK = graphql(`
   mutation RemoveTask($id: ID!) {
@@ -22,7 +23,16 @@ export interface RemoveTaskProps {
 };
 
 export default function RemoveTask({ navigateDestination, cancelDestination = '..', task }: RemoveTaskProps) {
-  const [removeTask, { error, data }] = useMutation(REMOVE_TASK, { refetchQueries: ['GetTasks'], variables: { id: task.id }});
+  const [removeTask, { error, data }] = useMutation(REMOVE_TASK, {
+    variables: { id: task.id },
+    update(cache, { data: { taskDelete }}) {
+      const { tasks } = cache.readQuery({ query: GET_TASKS });
+      cache.writeQuery({
+        query: GET_TASKS,
+        data: { tasks: tasks.filter((task: Task) => task.id !== taskDelete.task.id) },
+      });
+    }, 
+  });
   const shouldNavigateOnDelete = typeof navigateDestination !== 'undefined';
   const willNavigate = shouldNavigateOnDelete && data && typeof error === 'undefined';
 

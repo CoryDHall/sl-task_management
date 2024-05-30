@@ -1,53 +1,54 @@
 import React from 'react';
+import { useMutation } from '@apollo/client';
 import { graphql } from '../../graphql/types';
-import { useQuery } from '@apollo/client';
+import { Task } from '../../graphql/types/graphql';
 import TaskView from '../components/TaskView';
-import {
-  Route, Routes, useParams,
-} from 'react-router';
-import { NavLink } from 'react-router-dom';
-import EditTask from './EditTask';
-import RemoveTask from './RemoveTask';
 
-const FIND_TASK = graphql(`
-  query FindTask($id: ID!) {
-    task(id: $id) {
-      id
-      title
-      description
-      completed
-      dueDate
+const MARK_TASK_COMPLETED = graphql(`
+  mutation MarkTaskCompleted($id: ID!) {
+    taskUpdate(input: { id: $id, taskInput: { completed: true } }) {
+      task {
+        id
+        completed
+      }
     }
-  }`);
+  }
+`);
 
+const MARK_TASK_INCOMPLETE = graphql(`
+  mutation MarkTaskIncomplete($id: ID!) {
+    taskUpdate(input: { id: $id, taskInput: { completed: false } }) {
+      task {
+        id
+        completed
+      }
+    }
+  }
+`);
 
-export default function ShowTask() {
-  const { id } = useParams();
-  const { loading, error, data } = useQuery(FIND_TASK, { variables: { id }});
+export interface ShowTaskProps {
+  task: Task;
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  allowMarkIncomplete?: boolean;
+};
+
+export default function ShowTask({ task, allowMarkIncomplete = false }: ShowTaskProps) {
+  const [markTaskCompleted] = useMutation(MARK_TASK_COMPLETED, { variables: { id: task.id }});
+  const [markTaskIncomplete] = useMutation(MARK_TASK_INCOMPLETE, { variables: { id: task.id }});
 
   return (
     <div>
-      <Routes>
-        <Route index element={<TaskView task={data.task} />} />
-        <Route path="edit" element={<EditTask task={data.task} navigateDestination=".." />} />
-        <Route path="remove" element={<RemoveTask task={data.task} navigateDestination="/" />} />
-      </Routes>
+      <div>
+        {task.completed ? (
+          allowMarkIncomplete && (
+            <button onClick={() => markTaskIncomplete()}>Mark Incomplete</button>
+          )
+        ) : (
+          <button onClick={() => markTaskCompleted()}>Mark Completed</button>
+        )}
+      </div>
 
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="./edit" >Edit</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="./remove" >Delete</NavLink>
-          </li>
-
-        </ul>
-      </nav>
+      <TaskView task={task} />
     </div>
   );
 }

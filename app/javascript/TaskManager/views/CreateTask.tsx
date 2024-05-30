@@ -4,6 +4,7 @@ import React, {
 import { graphql } from '../../graphql/types';
 import { useMutation } from '@apollo/client';
 import { Navigate } from 'react-router';
+import { GET_TASKS } from '../graphql/queries';
 
 const CREATE_NEW_TASK = graphql(`
 mutation CreateNewTask($title: String!, $description: String!, $dueDate: ISO8601Date) {
@@ -28,7 +29,15 @@ export default function CreateTask({ requireDueDate = false, navigateDestination
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLInputElement>(null);
   const dueDateRef = useRef<HTMLInputElement>(null);
-  const [createTask, { error, data }] = useMutation(CREATE_NEW_TASK, { refetchQueries: ['GetTasks'] });
+  const [createTask, { error, data }] = useMutation(CREATE_NEW_TASK, {
+    update(cache, { data: { taskCreate }}) {
+      const { tasks } = cache.readQuery({ query: GET_TASKS });
+      cache.writeQuery({
+        query: GET_TASKS,
+        data: { tasks: tasks.concat([taskCreate.task]) },
+      });
+    },
+  });
   const [toggleDueDate, setToggleDueDate] = useState(false);
   const shouldNavigateOnCreate = typeof navigateDestination !== 'undefined';
   const willNavigate = shouldNavigateOnCreate && data && typeof error === 'undefined';
@@ -46,7 +55,7 @@ export default function CreateTask({ requireDueDate = false, navigateDestination
         });
         titleRef.current!.value = '';
         descriptionRef.current!.value = '';
-        dueDateRef.current!.value = '';
+        if (dueDateRef.current) dueDateRef.current.value = '';
       } catch (error) {
         console.error(error);
       }

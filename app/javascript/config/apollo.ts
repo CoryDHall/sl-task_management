@@ -19,6 +19,7 @@ export const getApolloConfig = () => {
         fetchPolicy: 'cache-first' as const,
       },
     },
+    connectToDevTools: true, // NOTE: This is a security risk in production
   };
 };
 function getCSRFTokenFromDOM(): string {
