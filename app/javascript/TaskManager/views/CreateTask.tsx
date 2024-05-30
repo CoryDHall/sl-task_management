@@ -5,11 +5,11 @@ import { useMutation } from '@apollo/client';
 import { Navigate } from 'react-router';
 import { GET_TASKS } from '../graphql/queries';
 import { CREATE_NEW_TASK } from '../graphql/mutations';
+import { iViewProps } from '../common/viewProps';
 
-export interface CreateTaskProps {
+export interface CreateTaskProps extends iViewProps {
   requireDueDate?: boolean;
-  navigateDestination?: string;
-  };
+};
 
 export default function CreateTask({ requireDueDate = false, navigateDestination } : CreateTaskProps) {
   const titleRef = useRef<HTMLInputElement>(null);

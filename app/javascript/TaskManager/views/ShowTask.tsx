@@ -3,13 +3,12 @@ import { useMutation } from '@apollo/client';
 import { Task } from '../../graphql/types/graphql';
 import TaskView from '../components/TaskView';
 import {
-  MARK_TASK_COMPLETED, MARK_TASK_INCOMPLETE, 
+  MARK_TASK_COMPLETED, MARK_TASK_INCOMPLETE,
 } from '../graphql/mutations';
+import { iTaskViewProps } from '../common/viewProps';
 
 
-export interface ShowTaskProps {
-  task: Task;
-
+export interface ShowTaskProps extends iTaskViewProps {
   allowMarkIncomplete?: boolean;
 };
 

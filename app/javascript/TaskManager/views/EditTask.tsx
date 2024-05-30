@@ -6,12 +6,12 @@ import { Navigate } from 'react-router';
 import { Task } from '../../graphql/types/graphql';
 import { NavLink } from 'react-router-dom';
 import { UPDATE_TASK } from '../graphql/mutations';
+import {
+  iTaskViewProps, iViewProps, 
+} from '../common/viewProps';
 
 
-export interface EditTaskProps {
-  navigateDestination?: string;
-  cancelDestination?: string;
-  task: Task;
+export interface EditTaskProps extends iViewProps, iTaskViewProps {
 };
 
 export default function EditTask({ navigateDestination, cancelDestination = '..', task }: EditTaskProps) {

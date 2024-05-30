@@ -5,12 +5,12 @@ import { Navigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { GET_TASKS } from '../graphql/queries';
 import { REMOVE_TASK } from '../graphql/mutations';
+import {
+  iTaskViewProps, iViewProps, 
+} from '../common/viewProps';
 
 
-export interface RemoveTaskProps {
-  navigateDestination?: string;
-  cancelDestination?: string;
-  task: Task;
+export interface RemoveTaskProps extends iViewProps, iTaskViewProps {
 };
 
 export default function RemoveTask({ navigateDestination, cancelDestination = '..', task }: RemoveTaskProps) {
