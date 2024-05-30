@@ -1,20 +1,45 @@
 import React from 'react';
 import AllTasks from './views/AllTasks';
 import CreateTask from './views/CreateTask';
+import {
+  Route, Routes,
+} from 'react-router';
+import { composePage } from './components/page';
+import { NavLink } from 'react-router-dom';
+
+const AllTasksPage = composePage('Tasks', AllTasks);
+const NewTaskPage = composePage('New Task', CreateTask);
+
 export default function App() {
   return (
     <main>
       <h1>Task Manager</h1>
 
-      <section>
-        <h2>Create Task</h2>
-        <CreateTask />
-      </section>
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/">All Tasks</NavLink>
+          </li>
 
-      <section>
-        <h2>Tasks</h2>
-        <AllTasks />
-      </section>
+          <li>
+            <NavLink to="/new">New Task</NavLink>
+          </li>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route
+          path="/"
+          element={<AllTasksPage />}
+        />
+
+        <Route
+          path="/new"
+          element={<NewTaskPage navigateDestination="/" />}
+        />
+
+        <Route path="*" element={<h1>Not Found</h1>} />
+      </Routes>
 
     </main>
   );

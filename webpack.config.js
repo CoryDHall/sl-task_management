@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   devtool: 'source-map',
   entry: { application: './app/javascript/application.ts' },
   module: {

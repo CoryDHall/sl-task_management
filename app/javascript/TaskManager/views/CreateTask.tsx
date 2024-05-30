@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { graphql } from '../../graphql/types';
 import { useMutation } from '@apollo/client';
+import { Navigate } from 'react-router';
 
 const CREATE_NEW_TASK = graphql(`
 mutation CreateNewTask($title: String!, $description: String!, $dueDate: ISO8601Date) {
@@ -20,14 +21,17 @@ mutation CreateNewTask($title: String!, $description: String!, $dueDate: ISO8601
 
 export interface CreateTaskProps {
   requireDueDate?: boolean;
+  navigateDestination?: string;
   };
 
-export default function CreateTask({ requireDueDate = false } : CreateTaskProps) {
+export default function CreateTask({ requireDueDate = false, navigateDestination } : CreateTaskProps) {
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLInputElement>(null);
   const dueDateRef = useRef<HTMLInputElement>(null);
-  const [createTask, { error }] = useMutation(CREATE_NEW_TASK, { refetchQueries: ['GetTasks'] });
+  const [createTask, { error, data }] = useMutation(CREATE_NEW_TASK, { refetchQueries: ['GetTasks'] });
   const [toggleDueDate, setToggleDueDate] = useState(false);
+  const shouldNavigateOnCreate = typeof navigateDestination !== 'undefined';
+  const willNavigate = shouldNavigateOnCreate && data && typeof error === 'undefined';
 
   return (
     <form onSubmit={async (e) => {
@@ -37,7 +41,7 @@ export default function CreateTask({ requireDueDate = false } : CreateTaskProps)
           variables: {
             title: titleRef.current!.value,
             description: descriptionRef.current!.value,
-            ...dueDateRef.current!.value ? { dueDate: dueDateRef.current!.value } : {},
+            ...((requireDueDate || toggleDueDate) && dueDateRef.current!.value) ? { dueDate: dueDateRef.current!.value } : {},
           },
         });
         titleRef.current!.value = '';
@@ -47,6 +51,13 @@ export default function CreateTask({ requireDueDate = false } : CreateTaskProps)
         console.error(error);
       }
     }}>
+      {willNavigate && (
+        <>
+          <p>Task created! Navigating...</p>
+          <Navigate to={navigateDestination} />
+        </>
+      )}
+
       <label>
         Title:
         <input required type="text" ref={titleRef} />
