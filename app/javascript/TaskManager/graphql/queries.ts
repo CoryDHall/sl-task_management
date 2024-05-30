@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client';
+import { graphql } from '../../graphql/types';
 
-export const GET_TASKS = gql`
+export const GET_TASKS = graphql(`
  query GetTasks {
     tasks {
       id
@@ -10,4 +10,4 @@ export const GET_TASKS = gql`
       dueDate
     }
   }
-`;
+`);

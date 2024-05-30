@@ -1,6 +1,6 @@
 import React from 'react';
-import { Task } from '../types';
 import TaskView from './TaskView';
+import { Task } from '../../graphql/types/graphql';
 
 export interface TaskListProps {
   tasks: Task[];

@@ -7,7 +7,7 @@ module Types
     field :description, String
     field :completed, Boolean
     field :due_date, GraphQL::Types::ISO8601Date, null: true
-    field :created_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :created_at, GraphQL::Types::ISO8601DateTime, null: true
+    field :updated_at, GraphQL::Types::ISO8601DateTime, null: true
   end
 end
