@@ -16,6 +16,7 @@ const documents = {
     "\n query GetTasks {\n    tasks {\n      id\n      title\n      description\n      completed\n      dueDate\n    }\n  }\n": types.GetTasksDocument,
     "\nmutation CreateNewTask($title: String!, $description: String!, $dueDate: ISO8601Date) {\n  taskCreate(input: {taskInput: { title: $title, description: $description, dueDate: $dueDate }}) {\n    task {\n      id\n      title\n      description\n      completed\n      dueDate\n    }\n  }\n}\n  ": types.CreateNewTaskDocument,
     "\nmutation UpdateTask($id: ID!, $title: String, $description: String, $dueDate: ISO8601Date, $removeDueDate: Boolean) {\n  taskUpdate(input: {id: $id, taskInput: { title: $title, description: $description, dueDate: $dueDate, removeDueDate: $removeDueDate}}) {\n    task {\n      id\n      title\n      description\n      completed\n      dueDate\n    }\n  }\n}\n  ": types.UpdateTaskDocument,
+    "\n  mutation RemoveTask($id: ID!) {\n    taskDelete(input: { id: $id }) {\n      task {\n        id\n      }\n    }\n  }\n": types.RemoveTaskDocument,
     "\n  query FindTask($id: ID!) {\n    task(id: $id) {\n      id\n      title\n      description\n      completed\n      dueDate\n    }\n  }": types.FindTaskDocument,
 };
 
@@ -45,6 +46,10 @@ export function graphql(source: "\nmutation CreateNewTask($title: String!, $desc
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\nmutation UpdateTask($id: ID!, $title: String, $description: String, $dueDate: ISO8601Date, $removeDueDate: Boolean) {\n  taskUpdate(input: {id: $id, taskInput: { title: $title, description: $description, dueDate: $dueDate, removeDueDate: $removeDueDate}}) {\n    task {\n      id\n      title\n      description\n      completed\n      dueDate\n    }\n  }\n}\n  "): (typeof documents)["\nmutation UpdateTask($id: ID!, $title: String, $description: String, $dueDate: ISO8601Date, $removeDueDate: Boolean) {\n  taskUpdate(input: {id: $id, taskInput: { title: $title, description: $description, dueDate: $dueDate, removeDueDate: $removeDueDate}}) {\n    task {\n      id\n      title\n      description\n      completed\n      dueDate\n    }\n  }\n}\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation RemoveTask($id: ID!) {\n    taskDelete(input: { id: $id }) {\n      task {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation RemoveTask($id: ID!) {\n    taskDelete(input: { id: $id }) {\n      task {\n        id\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

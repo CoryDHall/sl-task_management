@@ -23,10 +23,11 @@ mutation UpdateTask($id: ID!, $title: String, $description: String, $dueDate: IS
 
 export interface EditTaskProps {
   navigateDestination?: string;
+  cancelDestination?: string;
   task: Task;
 };
 
-export default function EditTask({ navigateDestination, task }: EditTaskProps) {
+export default function EditTask({ navigateDestination, cancelDestination = '..', task }: EditTaskProps) {
   const [updateTask, { error, data }] = useMutation(UPDATE_TASK, { refetchQueries: [/* 'FindTask' */] });
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLInputElement>(null);
@@ -91,7 +92,7 @@ export default function EditTask({ navigateDestination, task }: EditTaskProps) {
       <button type="submit">Update Task</button>
 
       <div>
-        <NavLink to={navigateDestination || '..'}>Back</NavLink>
+        <NavLink end to={cancelDestination}>Back</NavLink>
       </div>
 
       {error && <p>Error: {error.message}</p>}

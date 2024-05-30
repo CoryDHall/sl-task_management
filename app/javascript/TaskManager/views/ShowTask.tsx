@@ -7,6 +7,7 @@ import {
 } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import EditTask from './EditTask';
+import RemoveTask from './RemoveTask';
 
 const FIND_TASK = graphql(`
   query FindTask($id: ID!) {
@@ -32,6 +33,7 @@ export default function ShowTask() {
       <Routes>
         <Route index element={<TaskView task={data.task} />} />
         <Route path="edit" element={<EditTask task={data.task} navigateDestination=".." />} />
+        <Route path="remove" element={<RemoveTask task={data.task} navigateDestination="/" />} />
       </Routes>
 
       <nav>
@@ -39,6 +41,11 @@ export default function ShowTask() {
           <li>
             <NavLink to="./edit" >Edit</NavLink>
           </li>
+
+          <li>
+            <NavLink to="./remove" >Delete</NavLink>
+          </li>
+
         </ul>
       </nav>
     </div>
