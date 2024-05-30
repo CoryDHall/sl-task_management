@@ -6,9 +6,11 @@ import {
 } from 'react-router';
 import { composePage } from './components/page';
 import { NavLink } from 'react-router-dom';
+import ShowTask from './views/ShowTask';
 
 const AllTasksPage = composePage('Tasks', AllTasks);
 const NewTaskPage = composePage('New Task', CreateTask);
+const ShowTaskPage = composePage('Task', ShowTask);
 
 export default function App() {
   return (
@@ -36,6 +38,11 @@ export default function App() {
         <Route
           path="/new"
           element={<NewTaskPage navigateDestination="/" />}
+        />
+
+        <Route
+          path="/task/:id/*"
+          element={<ShowTaskPage />}
         />
 
         <Route path="*" element={<h1>Not Found</h1>} />

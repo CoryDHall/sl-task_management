@@ -1,5 +1,6 @@
 import React from 'react';
 import { Task } from '../../graphql/types/graphql';
+import { NavLink } from 'react-router-dom';
 
 export interface TaskViewProps {
   task: Task;
@@ -7,8 +8,13 @@ export interface TaskViewProps {
 
 export default function TaskView({ task }: TaskViewProps) {
   return (
-    <div>
-      <h2>{task.title}</h2>
+    <div className="task">
+      <h3>
+        <NavLink to={`/task/${task.id}`}>
+          {task.title}
+        </NavLink>
+      </h3>
+
       <p>{task.description}</p>
       <p>{task.completed ? 'Completed' : 'Not Completed'}</p>
       <p>{task.dueDate}</p>

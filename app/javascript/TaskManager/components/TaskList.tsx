@@ -8,7 +8,7 @@ export interface TaskListProps {
 
 export default function TaskList({ tasks }: TaskListProps) {
   return (
-    <ul>
+    <ul className="task_list">
       {tasks.map(t => (
         <li key={t.id}><TaskView task={t} /></li>
       ))}
