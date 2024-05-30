@@ -7,6 +7,7 @@ module Types
     argument :description, String, required: false
     argument :completed, Boolean, required: false
     argument :due_date, GraphQL::Types::ISO8601Date, required: false
+    argument :remove_due_date, Boolean, required: false
     argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
     argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
   end

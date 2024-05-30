@@ -109,6 +109,7 @@ input TaskInput {
   description: String
   dueDate: ISO8601Date
   id: ID
+  removeDueDate: Boolean
   title: String
   updatedAt: ISO8601DateTime
 }

@@ -104,6 +104,7 @@ export type TaskInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   dueDate?: InputMaybe<Scalars['ISO8601Date']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
+  removeDueDate?: InputMaybe<Scalars['Boolean']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   updatedAt?: InputMaybe<Scalars['ISO8601DateTime']['input']>;
 };
