@@ -74,3 +74,5 @@ gem "graphql", "~> 2.3"
 gem "graphiql-rails", group: :development
 
 gem "faker", "~> 3.3"
+
+gem "dartsass-rails", "~> 0.5.0"

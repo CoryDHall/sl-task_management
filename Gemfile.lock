@@ -95,6 +95,9 @@ GEM
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
+    dartsass-rails (0.5.0)
+      railties (>= 6.0.0)
+      sass-embedded (~> 1.63)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -106,6 +109,15 @@ GEM
     foreman (0.88.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.27.0-aarch64-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.27.0-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.27.0-x86_64-linux)
+      bigdecimal
+      rake (>= 13)
     graphiql-rails (1.10.0)
       railties
     graphql (2.3.4)
@@ -212,6 +224,12 @@ GEM
     rexml (3.2.8)
       strscan (>= 3.0.9)
     rubyzip (2.3.2)
+    sass-embedded (1.77.3-aarch64-linux-gnu)
+      google-protobuf (>= 3.25, < 5.0)
+    sass-embedded (1.77.3-arm64-darwin)
+      google-protobuf (>= 3.25, < 5.0)
+    sass-embedded (1.77.3-x86_64-linux-gnu)
+      google-protobuf (>= 3.25, < 5.0)
     selenium-webdriver (4.21.1)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
@@ -258,6 +276,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  dartsass-rails (~> 0.5.0)
   debug
   faker (~> 3.3)
   foreman (~> 0.88.1)
